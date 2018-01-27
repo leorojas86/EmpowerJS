@@ -1,0 +1,26 @@
+.header {
+	height:40px;
+  background:#3D557E;
+  box-shadow:0 0 3px #112A56,0 3px 6px #112A56;
+	text-align:center;
+}
+
+.header .right {
+	right:0px; margin-right:5px;
+}
+
+.header .left {
+	left:0px; margin-left:5px;
+}
+
+.header button {
+	position:absolute;
+	width:30px; height:30px;
+	font-size:22px;
+}
+
+.header .screen_title {
+	position:relative; top:2px;
+	font-size:30px;
+	color:white;
+}

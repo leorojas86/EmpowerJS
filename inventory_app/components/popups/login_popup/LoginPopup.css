@@ -1,0 +1,24 @@
+.login_popup p {
+  margin-top:10px; margin-bottom:10px;
+}
+
+.login_popup .popup_content {
+	top:40px; right:5px;
+}
+
+.login_popup button {
+	display:block; width:120px; margin-top:25px;
+  text-align:left; 
+}
+
+.login_popup .spinner {
+	border:medium none; border-radius:10px;
+}
+
+.login_popup div.grayout {
+	background:transparent;
+}
+
+.login_popup input {
+	width:120px;
+}

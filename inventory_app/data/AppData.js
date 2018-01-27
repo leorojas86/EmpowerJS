@@ -1,0 +1,29 @@
+class AppData {
+
+  constructor() {
+    this.data = {//Default values
+			user: null,
+			currentLanguage:'en',
+			currentScreen: 'welcome',
+			currentInventoryItem: null
+		};
+  }
+
+  getUser() { return this.data.user; }
+  setUser(user) { this.data.user = user; }
+
+  getCurrentScreen() { return this.data.currentScreen; }
+  setCurrentScreen(screen) { this.data.currentScreen = screen; }
+
+  getCurrentLanguage() { return this.data.currentLanguage; }
+  setCurrentLanguage(language) {
+    this.data.currentLanguage = language;
+    Localization.instance.currentLanguage = language;
+  }
+
+  getCurrentInventoryItem() { return this.data.currentInventoryItem; }
+  setCurrentInventoryItem(item) { this.data.currentInventoryItem = item; }
+
+}
+
+AppData.instance = new AppData();

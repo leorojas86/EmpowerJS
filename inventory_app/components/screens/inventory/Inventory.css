@@ -1,0 +1,5 @@
+.inventory {
+  position:relative; margin:10px; min-height:300px;
+  border:#3d557eab; border-radius:5px; border-style:solid;
+  min-height:450px;
+}

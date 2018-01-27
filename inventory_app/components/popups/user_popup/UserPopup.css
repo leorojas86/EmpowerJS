@@ -1,0 +1,17 @@
+.user_popup .popup_content {
+	right:5px; top:40px; padding:10px;
+	text-align:left;
+}
+
+.user_popup button {
+	display:block; width:140px; margin-top:15px;
+	text-align:left; 
+}
+
+.user_popup .spinner {
+	border:medium none; border-radius:10px;
+}
+
+.user_popup div.grayout {
+	background:transparent;
+}

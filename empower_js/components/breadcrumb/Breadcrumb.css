@@ -1,0 +1,19 @@
+.breadcrumb {
+  display:inline; margin:3px;
+  font-size:25px;
+}
+
+.breadcrumb .home {
+  font-size:28px;
+  cursor:pointer; cursor:hand;
+}
+
+.breadcrumb .arrow {
+  margin:5px;
+  font-size:20px;
+}
+
+.breadcrumb .clickable_path_item {
+  text-decoration:underline;
+  cursor:pointer; cursor:hand;
+}

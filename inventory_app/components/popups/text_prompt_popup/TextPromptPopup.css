@@ -1,0 +1,16 @@
+.text_prompt_popup .popup_content {
+	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
+	padding:30px;
+}
+
+.text_prompt_popup .title {
+	font-size:20px;
+}
+
+.text_prompt_popup input {
+	width: 250px;
+}
+
+.text_prompt_popup button {
+	text-align:center;
+}
