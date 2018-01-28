@@ -1,5 +1,5 @@
 # EmpowerJS
-Open source project for building javascript applications in pure JS.
+Open source project for building web applications using pure JS.
 
 NPM modules, Angular, React, many other project dependencies give us advantages like:
 
