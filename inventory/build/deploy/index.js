@@ -1,98 +1,350 @@
-class AppData {
+class BreadcrumbModel {
+
+  constructor(onPathNameClicked) {
+    this.data = { path:[] };
+    this.onPathNameClicked = onPathNameClicked;
+  }
+
+  isInPath(itemId) {
+    return this.data.path.find((currentPathItem) => currentPathItem.id === itemId) != null;
+  }
+
+}
+
+class BreadcrumbView {
+
+  constructor(id, component) {
+    this.id = id;
+    this.component = component;
+  }
+
+  buildHTML() {
+    let pathHTML = '';
+    let index = 0;
+    this.component.model.data.path.forEach((currentPathItem) => {
+      if(index === 0) { //First one
+        pathHTML += `<span id='path_${index}' class="lsf symbol home">${currentPathItem.name}</span>`;
+      } else if(index === this.component.model.data.path.length - 1) { //Last one
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentPathItem.name}</span>`;
+      } else {
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentPathItem.name}</span>`;
+      }
+      index++;
+    });
+
+    return `<div id='${this.id}' class='${this.id} breadcrumb'>
+              ${pathHTML}
+            </div>`;
+  }
+
+  onDomUpdated() {
+    const path = this.component.model.data.path;
+    path.forEach((currentPathItem) => {
+      const index = path.indexOf(currentPathItem);
+      if(index < path.length - 1) { //Not the last one
+        Html.onClick(`path_${index}`, () => this.component.model.onPathNameClicked(currentPathItem));
+      }
+    });
+  }
+
+}
+
+class Breadcrumb {
+
+  constructor(id, onPathNameClicked) {
+    this.model = new BreadcrumbModel(onPathNameClicked);
+    this.view = new BreadcrumbView(id, this);
+  }
+
+}
+
+class DropdownMenuModel {
 
   constructor() {
-    this.data = {//Default values
-			user: null,
-			currentLanguage:'en',
-			currentScreen: 'welcome',
-			currentInventoryItem: null
-		};
-  }
-
-  getUser() { return this.data.user; }
-  setUser(user) { this.data.user = user; }
-
-  getCurrentScreen() { return this.data.currentScreen; }
-  setCurrentScreen(screen) { this.data.currentScreen = screen; }
-
-  getCurrentLanguage() { return this.data.currentLanguage; }
-  setCurrentLanguage(language) {
-    this.data.currentLanguage = language;
-    Localization.instance.currentLanguage = language;
-  }
-
-  getCurrentInventoryItem() { return this.data.currentInventoryItem; }
-  setCurrentInventoryItem(item) { this.data.currentInventoryItem = item; }
-
-}
-
-AppData.instance = new AppData();
-
-class Config {
-  static get() {
-    return {
-      environment: 'mock'
-    };
-  }
-}
-
-class Environments {
-  static get() {
-    return {
-      mock: {
-        responseSec: 0.1
-      },
-      dev: {
-
-      },
-      prod: {
-
-      }
-    };
-  }
-}
-
-class LocalizationTable {
-
-  static get() {
-    return {
-      "email_text": { en: 'Email', es: 'Correo Electrónico' },
-      "password_text": { en: 'Password', es: 'Contraseña' },
-      "login_button_text": { en: 'Login', es: 'Ingresar' },
-      "register_button_text": { en: 'Register', es: 'Registrarse' },
-      "logout_button_text": { en: 'Logout', es: 'Salir' },
-      "login_failed_text": { en: 'Login Failed', es: 'Fallo en autenticación' },
-      "load_error_text": { en: 'Loading error', es: 'Error cargando' },
-      "something_wrong_text": { en: 'Something went wrong', es: 'Algo salió mal' },
-      "ok_text": { en: 'Ok', es: 'Aceptar' },
-      "loading_text": { en: 'Loading', es: 'Cargando' },
-      "cart_text": { en: 'Cart', es: 'Carrito' },
-      "notifications_text": { en: 'Notifications', es: 'Notificaciones' },
-      "language_text": { en: 'Language', es: 'Lenguage' },
-      "login_to_get_started_text": { en: 'Login to get started', es: 'Autentíquese para iniciar' },
-      "settings_text": { en: 'Settings', es: 'Configuración' },
-      "skin_text": { en: 'Skin', es: 'Apariencia' },
-      "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
-      "inventory_text": { en: 'Inventory', es: 'Inventario' },
-      "add_file_text": { en: 'Add File', es: 'Agregar Archivo' },
-      "add_folder_text": { en: 'Add Folder', es: 'Agregar Folder' },
-      "rename_text": { en: 'Rename', es: 'Renombrar' },
-      "cut_text": { en: 'Cut', es: 'Cortar' },
-      "delete_text": { en: 'Delete', es: 'Borrar' },
-      "paste_text": { en: 'Paste', es: 'Pegar' },
-      "cancel_text":  { en: 'Cancel', es: 'Cancelar' },
-      "add_file_text": { en: 'Add file', es: '+ Archivo' },
-      "add_folder_text": { en: 'Add folder', es: '+ Directorio' },
-      "change_name_text": { en: 'Change name', es: 'Cambio de nombre' },
-      "name_text": { en: 'Name', es: 'Nombre' },
-      "save_text": { en: 'Save', es: 'Salvar' },
-      "select_image_text": { en: 'Select image', es: 'Seleccionar imagen' },
-      /*Error Codes*/
-      "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
-    };
+    this.data = { options:[] };
+    this.isShown = false;
   }
 
 }
+
+class DropdownMenuView {
+
+  constructor(id, component) {
+    this.id = id;
+    this.component = component;
+  }
+
+  buildHTML() {
+    if(this.component.model.isShown) {
+      let optionsHTML = '';
+      this.component.model.data.options.forEach((option) => {
+        optionsHTML += `<button id='${option.id}' class='${option.id} option'>
+                          <span class="lsf symbol">${option.symbol}</span> ${option.text}
+                        </button>`;
+      });
+      return `<div id='${this.id}' class='${this.id} dropdown_menu'>
+                ${optionsHTML}
+              </div>`;
+    }
+    return `<div id='${this.id}'></div>`;
+  }
+
+  onDomUpdated() {
+    if(this.component.model.isShown) {
+      this.component.model.data.options.forEach((option) => {
+        Html.onClick(option.id, () => {
+          this.component.hide();
+          option.onClick();
+        });
+      });
+    }
+  }
+
+  setPosition(position) {
+    const element = Html.getElement(this.id);
+    element.style.position = "absolute";
+    element.style.display  = 'inline';
+		element.style.left 	   = position.x + "px";
+		element.style.top  	   = position.y + "px";
+  }
+
+}
+
+class DropdownMenu {
+
+  constructor(id) {
+    this.model = new DropdownMenuModel();
+    this.view = new DropdownMenuView(id, this);
+  }
+
+  show(options, position) {
+    this.model.data.options = options;
+    this.model.isShown = true;
+    Html.refresh(this);
+    this.view.setPosition(position);
+  }
+
+  hide() {
+    this.model.isShown = false;
+    Html.refresh(this);
+  }
+
+}
+
+class PopupModel {
+
+  constructor() {
+    this.isShown = false;
+  }
+
+}
+
+class PopupView {
+  constructor(component, contentComponent) {
+    this.component = component;
+    this.contentComponent = contentComponent;
+    this.id = `${contentComponent.view.id}_main`;
+  }
+
+  buildHTML() {
+    if(this.component.model.isShown) {
+      return `<div id='${this.id}' class='${this.contentComponent.view.id} popup'>
+                <div id='${this.contentComponent.view.id}_grayout' class='grayout'></div>
+                <div class='popup_content'>
+    						 ${ this.contentComponent.view.buildHTML() }
+                </div>
+  			  		</div>`;
+    }
+    return `<div id='${this.id}'></div>`;
+  }
+
+  onDomUpdated() {
+    if(this.component.model.isShown) {
+      Html.onMouseDown(`${this.contentComponent.view.id}_grayout`, () => this.component.hide());
+    }
+  }
+
+}
+
+class Popup {
+
+  constructor(contentComponent) {
+    this.model = new PopupModel();
+		this.view = new PopupView(this, contentComponent);
+    this.contentComponent = Html.addChild(contentComponent, this);
+    this.contentComponent.popup = this;
+  }
+
+  show(popupData) {
+    this.contentComponent.model.data = popupData;
+    this.model.isShown = true;
+    Html.refresh(this);
+  }
+
+  hide() {
+    this.model.isShown = false;
+    Html.refresh(this);
+  }
+
+}
+
+class SpinnerModel {
+
+  constructor() {
+    this.isShown = false;
+  }
+
+}
+
+class SpinnerView {
+  constructor(component, id) {
+    this.component = component;
+    this.id = id;
+  }
+
+  buildHTML() {
+    if(this.component.model.isShown) {
+      return `<div id='${this.id}' class='spinner'>
+                <div id='${this.id}_animation' class='spinner_animation'></div>
+              </div>`;
+    }
+    return `<div id='${this.id}'></div>`;
+  }
+
+}
+
+class Spinner {
+
+  constructor(id) {
+    this.model = new SpinnerModel();
+    this.view = new SpinnerView(this, id);
+  }
+
+  show() {
+    this.model.isShown = true;
+    Html.refresh(this);
+  }
+
+  hide() {
+    this.model.isShown = false;
+    Html.refresh(this);
+  }
+
+}
+
+class Html {
+
+  static addChild(component, parent) {
+    if(parent.childrenComponents) {
+      parent.childrenComponents.push(component);
+    } else {
+      parent.childrenComponents = [component];
+    }
+    return component;
+  }
+
+  static notifyOnDomUpdatedRecursively(component) {
+    if(component.view.onDomUpdated && document.getElementById(component.view.id)) {
+      component.view.onDomUpdated();
+    }
+    if(component.childrenComponents) {
+      component.childrenComponents.forEach((currentChild) => Html.notifyOnDomUpdatedRecursively(currentChild));
+    }
+  }
+
+  static refresh(component) {
+    const element = document.getElementById(component.view.id);
+    if(element) {
+      const htmlText = component.view.buildHTML();
+      element.outerHTML = Localization.instance.localizeHTML(htmlText);
+      Html.notifyOnDomUpdatedRecursively(component);
+    }
+  }
+
+  static getElement(id) {
+    return document.getElementById(id);
+  }
+
+  static onClick(id, onClick) {
+    document.getElementById(id).onclick = onClick;
+  }
+
+  static onMouseDown(id, onMouseDown) {
+    document.getElementById(id).onmousedown = onMouseDown;
+  }
+
+  static onKeyUp(id, onKeyUp) {
+    document.getElementById(id).onkeyup = onKeyUp;
+  }
+
+  static onChange(id, onChange) {
+    document.getElementById(id).onchange = onChange;
+  }
+
+  static setDisabled(id, disabled) {
+    document.getElementById(id).disabled = disabled;
+  }
+
+  static isDisabled(id) {
+    return document.getElementById(id).disabled;
+  }
+
+  static getValue(id) {
+    return document.getElementById(id).value;
+  }
+
+  static setFocus(id) {
+    return document.getElementById(id).focus();
+  }
+
+  static getImageData(id) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {//TODO: Handle error case
+        resolve(e.target.result);
+      };
+      reader.readAsDataURL(document.getElementById(id).files[0]);
+    });
+  }
+
+}
+
+class Localization {
+
+  initialize(localizationTable, currentLanguage) {
+    this.localizationTable = localizationTable;
+    this.currentLanguage = currentLanguage;
+  }
+
+  _getLocalizedText(match) {
+    const localizeKey = match.replace('[@', '').replace('@]', '');
+    const localizedText = this.localizationTable[localizeKey];
+    if(localizedText) {
+      return localizedText[this.currentLanguage];
+    }
+    return null;
+  }
+
+  localizeHTML(html) {
+    const regex = /\[@+\w+\@\]/g;
+    const matches = html.match(regex);
+    if(matches) {
+      matches.forEach((match) => {
+        const localizedText = this._getLocalizedText(match);
+        if(localizedText) {
+          html = html.replace(match, localizedText);
+        }
+      });
+    }
+    return html;
+  }
+
+}
+
+
+//https://regex101.com/
+//\[@+\w+\@\]
+//<button id="user_button" class="user_button">[@LOGIN_TEXT@]</button>
 
 class ApiClient {
   constructor() {
@@ -108,8 +360,6 @@ class ApiClient {
     }
   }
 }
-
-ApiClient.instance = new ApiClient();
 
 class InventoryServiceMock {
 
@@ -336,8 +586,6 @@ class App
 	}
 
 }
-
-App.instance = new App();
 
 /*
 
@@ -1140,6 +1388,105 @@ class Welcome {
   }
 
 }
+
+class AppData {
+
+  constructor() {
+    this.data = {//Default values
+			user: null,
+			currentLanguage:'en',
+			currentScreen: 'welcome',
+			currentInventoryItem: null
+		};
+  }
+
+  getUser() { return this.data.user; }
+  setUser(user) { this.data.user = user; }
+
+  getCurrentScreen() { return this.data.currentScreen; }
+  setCurrentScreen(screen) { this.data.currentScreen = screen; }
+
+  getCurrentLanguage() { return this.data.currentLanguage; }
+  setCurrentLanguage(language) {
+    this.data.currentLanguage = language;
+    Localization.instance.currentLanguage = language;
+  }
+
+  getCurrentInventoryItem() { return this.data.currentInventoryItem; }
+  setCurrentInventoryItem(item) { this.data.currentInventoryItem = item; }
+
+}
+
+class Config {
+  static get() {
+    return {
+      environment: 'mock'
+    };
+  }
+}
+
+class Environments {
+  static get() {
+    return {
+      mock: {
+        responseSec: 0.1
+      },
+      dev: {
+
+      },
+      prod: {
+
+      }
+    };
+  }
+}
+
+class LocalizationTable {
+
+  static get() {
+    return {
+      "email_text": { en: 'Email', es: 'Correo Electrónico' },
+      "password_text": { en: 'Password', es: 'Contraseña' },
+      "login_button_text": { en: 'Login', es: 'Ingresar' },
+      "register_button_text": { en: 'Register', es: 'Registrarse' },
+      "logout_button_text": { en: 'Logout', es: 'Salir' },
+      "login_failed_text": { en: 'Login Failed', es: 'Fallo en autenticación' },
+      "load_error_text": { en: 'Loading error', es: 'Error cargando' },
+      "something_wrong_text": { en: 'Something went wrong', es: 'Algo salió mal' },
+      "ok_text": { en: 'Ok', es: 'Aceptar' },
+      "loading_text": { en: 'Loading', es: 'Cargando' },
+      "cart_text": { en: 'Cart', es: 'Carrito' },
+      "notifications_text": { en: 'Notifications', es: 'Notificaciones' },
+      "language_text": { en: 'Language', es: 'Lenguage' },
+      "login_to_get_started_text": { en: 'Login to get started', es: 'Autentíquese para iniciar' },
+      "settings_text": { en: 'Settings', es: 'Configuración' },
+      "skin_text": { en: 'Skin', es: 'Apariencia' },
+      "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
+      "inventory_text": { en: 'Inventory', es: 'Inventario' },
+      "add_file_text": { en: 'Add File', es: 'Agregar Archivo' },
+      "add_folder_text": { en: 'Add Folder', es: 'Agregar Folder' },
+      "rename_text": { en: 'Rename', es: 'Renombrar' },
+      "cut_text": { en: 'Cut', es: 'Cortar' },
+      "delete_text": { en: 'Delete', es: 'Borrar' },
+      "paste_text": { en: 'Paste', es: 'Pegar' },
+      "cancel_text":  { en: 'Cancel', es: 'Cancelar' },
+      "add_file_text": { en: 'Add file', es: '+ Archivo' },
+      "add_folder_text": { en: 'Add folder', es: '+ Directorio' },
+      "change_name_text": { en: 'Change name', es: 'Cambio de nombre' },
+      "name_text": { en: 'Name', es: 'Nombre' },
+      "save_text": { en: 'Save', es: 'Salvar' },
+      "select_image_text": { en: 'Select image', es: 'Seleccionar imagen' },
+      /*Error Codes*/
+      "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
+    };
+  }
+
+}
+
+Localization.instance = new Localization();
+ApiClient.instance = new ApiClient();
+AppData.instance = new AppData();
+App.instance = new App();
 
 window.onload = () => {
 	Localization.instance.initialize(LocalizationTable.get(), AppData.instance.getCurrentLanguage());

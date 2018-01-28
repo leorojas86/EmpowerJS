@@ -25,5 +25,3 @@ class AppData {
   setCurrentInventoryItem(item) { this.data.currentInventoryItem = item; }
 
 }
-
-AppData.instance = new AppData();

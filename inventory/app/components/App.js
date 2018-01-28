@@ -72,8 +72,6 @@ class App
 
 }
 
-App.instance = new App();
-
 /*
 
 App

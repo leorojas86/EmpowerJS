@@ -12,5 +12,3 @@ class ApiClient {
     }
   }
 }
-
-ApiClient.instance = new ApiClient();

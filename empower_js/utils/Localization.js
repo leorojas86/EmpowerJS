@@ -30,8 +30,6 @@ class Localization {
 
 }
 
-Localization.instance = new Localization();
-
 
 //https://regex101.com/
 //\[@+\w+\@\]

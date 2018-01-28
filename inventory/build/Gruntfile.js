@@ -9,10 +9,8 @@ module.exports = function (grunt) {
     concat: {
       jss: {
         files: [{
-          src: ['../../empower_js/*.js',
-                '../app/data/*.js',
-                '../app/api/**/*.js',
-                '../app/components/**/*.js',
+          src: ['../../empower_js/**/*.js',
+                '../app/**/*.js',
                 '../app/index.js'],
           dest: 'deploy/index.js'
         }]
