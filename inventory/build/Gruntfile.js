@@ -9,7 +9,11 @@ module.exports = function (grunt) {
     concat: {
       jss: {
         files: [{
-          src: ['../../empower_js/*.js', '../app/**/*.js'],
+          src: ['../../empower_js/*.js',
+                '../app/data/*.js',
+                '../app/api/**/*.js',
+                '../app/components/**/*.js',
+                '../app/index.js'],
           dest: 'deploy/index.js'
         }]
       }
@@ -27,9 +31,10 @@ module.exports = function (grunt) {
         dest: 'deploy/index.html',
       },
       assets: {
-        expand: false,
-        src: '../app/assets/**',
-        dest: 'deploy/assets/',
+        expand: true,
+        cwd: '../app/assets',
+        src: '**',
+        dest: 'deploy/assets',
       },
     },
     usemin: {
