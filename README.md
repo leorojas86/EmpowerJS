@@ -8,7 +8,7 @@ NPM modules, Angular, React, many other project dependencies give us advantages 
 - Built-in components with some extensibility/configurability.
 - Some cross platform support.
 
-but they give us some some disadvantages as well:
+but they give us some disadvantages as well:
 
 - Inherited bugs.
 - Security issues.
