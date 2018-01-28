@@ -9,22 +9,15 @@ module.exports = function (grunt) {
     concat: {
       jss: {
         files: [{
-          src: ['../../empower_js/*.js'],
-          dest: 'deploy/empower_js.js'
-        },{
-          src: ['../app/**/*.js'],
+          src: ['../../empower_js/*.js', '../app/**/*.js'],
           dest: 'deploy/index.js'
         }]
       }
     },
     concat_css: {
       csss: {
-        src: ['../app/**/*.css'],
+        src: ['../../empower_js/**/*.css', '../app/**/*.css'],
         dest: 'deploy/index.css'
-      },
-      files: {
-        'deploy/index.css': ['../app/**/*.css'],
-        'deploy/empower_js.css': ['../../empower_js/**/*.css']
       }
     },
     copy: {
