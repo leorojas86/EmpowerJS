@@ -30,6 +30,8 @@ One of the guidelines that should be followed using EmpowerJS is to avoid includ
 ## What does EmpowerJS provide?
 - One 'Hello Word' App.
 - One demo app 'Inventory'.
+  - Lightweight app built using [LigatureSymbols]: https://github.com/kudakurage/LigatureSymbols
+  - Configured grunt build to generate a single .html, .js, .css for the app.
 - Few utility code to manipulate HTML/Dom elements easily.
 - Few reusable base components (spinner, popup, etc).
 - Very simple and efficient localization system.

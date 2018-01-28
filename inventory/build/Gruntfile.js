@@ -5,38 +5,38 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-    clean: ["deploy"],
+    clean: ["output"],
     concat: {
       jss: {
         files: [{
           src: ['../../empower_js/**/*.js',
                 '../app/**/*.js',
                 '../app/index.js'],
-          dest: 'deploy/index.js'
+          dest: 'output/index.js'
         }]
       }
     },
     concat_css: {
       csss: {
         src: ['../../empower_js/**/*.css', '../app/components/**/*.css'],
-        dest: 'deploy/index.css'
+        dest: 'output/index.css'
       }
     },
     copy: {
       index: {
         expand: false,
         src: '../app/index.html',
-        dest: 'deploy/index.html',
+        dest: 'output/index.html',
       },
       assets: {
         expand: true,
         cwd: '../app/assets',
         src: '**',
-        dest: 'deploy/assets',
+        dest: 'output/assets',
       },
     },
     usemin: {
-      html: 'deploy/index.html'
+      html: 'output/index.html'
     }
   });
 
@@ -47,10 +47,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-usemin');
 
   grunt.registerTask('build', [
-    'clean',      //Deletes deploy folder
-    'concat',     //Concats all js and generates 'deploy/index.js'
-    'concat_css', //Concats all js and generates 'deploy/index.css'
-    'copy',       //Copies index.html, spritesheet.png and jsons to deploy folder
+    'clean',      //Deletes output folder
+    'concat',     //Concats all js and generates 'output/index.js'
+    'concat_css', //Concats all js and generates 'output/index.css'
+    'copy',       //Copies index.html, spritesheet.png and jsons to output folder
     'usemin'      //Parses the index.html and replaces js,css references
   ]);
 };
