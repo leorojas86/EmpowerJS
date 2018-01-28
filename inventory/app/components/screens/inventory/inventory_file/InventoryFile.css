@@ -1,3 +1,7 @@
+.inventory_file {
+  min-height:450px;
+}
+
 .inventory_file .image {
   font-size:300px;
 }
