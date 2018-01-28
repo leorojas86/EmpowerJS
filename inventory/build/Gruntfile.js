@@ -16,7 +16,7 @@ module.exports = function (grunt) {
     },
     concat_css: {
       csss: {
-        src: ['../../empower_js/**/*.css', '../app/**/*.css'],
+        src: ['../../empower_js/**/*.css', '../app/components/**/*.css'],
         dest: 'deploy/index.css'
       }
     },
@@ -26,6 +26,11 @@ module.exports = function (grunt) {
         src: '../app/index.html',
         dest: 'deploy/index.html',
       },
+      assets: {
+        expand: true,
+        src: '../app/assets',
+        dest: 'deploy/assets',
+      },
     },
     usemin: {
       html: 'deploy/index.html'
@@ -34,11 +39,8 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-minified');
-  grunt.loadNpmTasks('grunt-contrib-obfuscator');
   grunt.loadNpmTasks('grunt-concat-css');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-usemin');
 
   grunt.registerTask('build', [

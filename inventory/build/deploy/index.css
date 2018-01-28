@@ -45,54 +45,6 @@
 @keyframes spin {
   0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); }
 }
-@charset 'UTF-8';
-
-@font-face {
-    font-family: 'LigatureSymbols';
-    src: url('LigatureSymbols-2.11.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-.lsf {
-  font-family: 'LigatureSymbols';
-  -webkit-text-rendering: optimizeLegibility;
-  -moz-text-rendering: optimizeLegibility;
-  -ms-text-rendering: optimizeLegibility;
-  -o-text-rendering: optimizeLegibility;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -ms-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -webkit-font-feature-settings: "liga" 1, "dlig" 1;
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -ms-font-feature-settings: "liga" 1, "dlig" 1;
-  -o-font-feature-settings: "liga" 1, "dlig" 1;
-  font-feature-settings: "liga" 1, "dlig" 1;
-}
-.lsf-icon:before {
-  content:attr(title);
-  margin-right:0.3em;
-  font-size:130%;
-  font-family: 'LigatureSymbols';
-  -webkit-text-rendering: optimizeLegibility;
-  -moz-text-rendering: optimizeLegibility;
-  -ms-text-rendering: optimizeLegibility;
-  -o-text-rendering: optimizeLegibility;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -ms-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -webkit-font-feature-settings: "liga" 1, "dlig" 1;
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -ms-font-feature-settings: "liga" 1, "dlig" 1;
-  -o-font-feature-settings: "liga" 1, "dlig" 1;
-  font-feature-settings: "liga" 1, "dlig" 1;
-}
 html {
 	-webkit-touch-callout:none; -moz-user-select:none; -webkit-user-select:none; /*HACK: Fix iOS oncontextmenu event*/
 	background:#c6ccd5;
@@ -163,7 +115,7 @@ button:hover {
 
 .login_popup button {
 	display:block; width:120px; margin-top:25px;
-  text-align:left; 
+  text-align:left;
 }
 
 .login_popup .spinner {
@@ -237,7 +189,7 @@ button:hover {
 
 .user_popup button {
 	display:block; width:140px; margin-top:15px;
-	text-align:left; 
+	text-align:left;
 }
 
 .user_popup .spinner {
