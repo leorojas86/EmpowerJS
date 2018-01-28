@@ -27,9 +27,9 @@ module.exports = function (grunt) {
         dest: 'deploy/index.html',
       },
       assets: {
-        expand: true,
-        src: '../app/assets',
-        dest: 'deploy/assets',
+        expand: false,
+        src: '../app/assets/**',
+        dest: 'deploy/assets/',
       },
     },
     usemin: {
