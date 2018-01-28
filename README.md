@@ -39,6 +39,7 @@ One of the guidelines that should be followed using EmpowerJS is to avoid includ
 - Performance:
   - When a component is refreshed that action will only refresh its component hierarchy.
   - No watchers, bindings, transpiling, or any other extra processing involved, just your code.
+  - Keep the html/DOM structure to the minimal required (do not create heavy html hierarchy).
 - Fast development:
   - No installation needed since no server needed.
   - Frontend and mock API/backend are pure JS so we can just drag a drop the index.html to the browser and that's it.
