@@ -4,7 +4,7 @@ Open source project for building javascript applications in pure JS.
 NPM modules, Angular, React, many other project dependencies give us advantages like:
 
 - Faster development.
-- A standard for developers to follow (MVC/Flux/Injection/Unit testing/etc).
+- Standard for developers to follow (MVC/Flux/Injection/Unit testing/etc).
 - Built-in components with some extensibility/configurability.
 - Some cross platform support.
 
