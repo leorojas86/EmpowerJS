@@ -73,4 +73,43 @@ class Html {
     });
   }
 
+  static onContextMenu(id, onContextMenu) {
+    const element = document.getElementById(id);
+    element.oncontextmenu = (event) => {
+      onContextMenu(event);
+      return false;
+    };
+		if(Platform.isiOS()) {//HACK: Fix iOS oncontextmenu event
+			let holdTimeoutId = null;
+      let wasHold = false;
+			element.addEventListener('touchstart', (e) => {
+				holdTimeoutId = holdTimeoutId || setTimeout(() => {
+          element.style.pointerEvents = "none";
+          wasHold = true;
+        }, 500);
+				return false;
+			}, true);
+			element.addEventListener('touchend', (e) => {
+        clearTimeout(holdTimeoutId);
+        holdTimeoutId = null;
+        if(wasHold) {
+          setTimeout(() => {
+            element.style.pointerEvents = "all";
+            onContextMenu(e.changedTouches[0]);
+          }, 50);
+          wasHold = false;
+        }
+				return false;
+			}, true);
+		}
+  }
+
+  static convertToScrolledPosition(point) {
+    const pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+		const pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
+		point.x += pageScrolledXOffset;
+		point.y += pageScrolledYOffset;
+    return point;
+  }
+
 }

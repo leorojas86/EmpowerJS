@@ -1,4 +1,13 @@
+.dropdown_menu .options {
+  position:absolute;
+}
+
 .dropdown_menu button {
   display:block; width:120px;
   text-align:left;
+}
+
+.dropdown_menu .grayout {
+	position:fixed; top:0px; right:0px; width:100%; height:100%;
+	background:transparent;
 }

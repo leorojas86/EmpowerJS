@@ -1,11 +1,11 @@
 .inventory_file {
-  min-height:450px;
+  min-height:300px;
 }
 
 .inventory_file .image {
-  font-size:300px;
+  font-size:200px;
 }
 
 .inventory_file img {
-  max-width: 300px; max-height: 300px;
+  max-width:80%; max-height:80%;
 }
