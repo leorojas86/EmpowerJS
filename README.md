@@ -44,6 +44,8 @@ One of the guidelines that should be followed using EmpowerJS is to avoid includ
   - No installation needed since no server needed.
   - Frontend and mock API/backend are pure JS so we can just drag a drop the index.html to the browser and that's it.
   - Mock API/backend has to be adjusted to the API that the application will use (or the API has to be adjusted to 'match' the mock API), the application will use Mock as one environment.
+- Multiplatform:
+  - Runs on Chrome on any platform and Safari on Mac/iOS.
 
 ## How to start?
 - Clone the repo.
