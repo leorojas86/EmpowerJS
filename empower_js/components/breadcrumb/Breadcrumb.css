@@ -1,6 +1,6 @@
 .breadcrumb {
   display:inline; margin:3px;
-  font-size:25px;
+  font-size:18px;
 }
 
 .breadcrumb .home {
@@ -9,8 +9,8 @@
 }
 
 .breadcrumb .arrow {
-  margin:5px;
-  font-size:20px;
+  margin:3px;
+  font-size:15px;
 }
 
 .breadcrumb .clickable_path_item {

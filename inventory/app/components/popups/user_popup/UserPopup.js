@@ -12,9 +12,9 @@ class UserPopupView {
   buildHTML() {
     const user = AppData.instance.getUser();
     return `<div id='${this.id}'>
-              <p>
+              <span class='user_name'>
                 <span class="lsf symbol">user</span> ${user.name}
-              </p>
+              </span>
               <button id='${this.id}_cart_button'>
                 <span class="lsf symbol">cart</span> [@cart_text@]
               </button>

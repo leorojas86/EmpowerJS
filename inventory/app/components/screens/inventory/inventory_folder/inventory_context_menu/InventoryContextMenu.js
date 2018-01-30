@@ -9,7 +9,7 @@ class InventoryContextMenuModel {
     if(item) {
       return [
         { id:'rename', text:'[@rename_text@]', symbol:'edit', onClick:() => this.onClick('rename', item) },
-        { id:'cut', text:'[@cut_text@]', symbol:'copy', onClick:() => this.onClick('cut', item) },
+        { id:'cut', text:'[@cut_text@]', symbol:'cut', onClick:() => this.onClick('cut', item) },
         { id:'delete', text:'[@delete_text@]', symbol:'delete', onClick:() => this.onClick('delete', item) }
       ];
     } else {

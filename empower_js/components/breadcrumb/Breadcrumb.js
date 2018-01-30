@@ -25,7 +25,7 @@ class BreadcrumbView {
       if(index === 0) { //First one
         pathHTML += `<span id='path_${index}' class="lsf symbol home">${currentPathItem.name}</span>`;
       } else if(index === this.component.model.data.path.length - 1) { //Last one
-        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentPathItem.name}</span>`;
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='latest'>${currentPathItem.name}</span>`;
       } else {
         pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentPathItem.name}</span>`;
       }

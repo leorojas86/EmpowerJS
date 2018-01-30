@@ -3,9 +3,13 @@
 	text-align:left;
 }
 
+.user_popup .user_name {
+	margin:5px;
+}
+
 .user_popup button {
 	display:block; width:140px; margin-top:15px;
-	text-align:left; 
+	text-align:left;
 }
 
 .user_popup .spinner {

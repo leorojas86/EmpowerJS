@@ -13,9 +13,7 @@ class TextPromptPopupView {
     const data = this.component.model.data;
     return  `<div id='${this.id}' align='center'>
                <span class='title'>${data.title}</span>
-               <p>
-                <input type='text' id='${this.id}_input_text' placeholder='${data.placeholder}' value='${data.value ? data.value : ''}'>
-               </p>
+               <input type='text' id='${this.id}_input_text' placeholder='${data.placeholder}' value='${data.value ? data.value : ''}'>
                <button id='${this.id}_cancel_button'>
                  <span class="lsf symbol">close</span> [@cancel_text@]
                </button>

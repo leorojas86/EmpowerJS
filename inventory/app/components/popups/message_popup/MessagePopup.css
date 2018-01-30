@@ -1,6 +1,6 @@
 .message_popup .popup_content {
 	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
-	padding:30px;
+	padding:30px; min-width:200px;
 }
 
 .message_popup .title {
