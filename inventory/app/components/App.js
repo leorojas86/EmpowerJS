@@ -14,6 +14,7 @@ class AppModel {
 		switch (AppData.instance.getCurrentScreen()) {
 			case 'welcome': return this.component.welcome; break;
 			case 'inventory': return this.component.inventory; break;
+			case 'registration': return this.component.registration; break;
 		}
  		return null;
 	}
@@ -49,8 +50,9 @@ class App
 		this.model = new AppModel(this);
 		this.view = new AppView(this);
 		this.header = Html.addChild(new Header(), this);
-		this.inventory = Html.addChild(new Inventory(), this);
 		this.welcome = Html.addChild(new Welcome(), this);
+		this.registration = Html.addChild(new Registration(), this);
+		this.inventory = Html.addChild(new Inventory(), this);
 		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
 		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
     this.userPopup = Html.addChild(new Popup(new UserPopup()), this);

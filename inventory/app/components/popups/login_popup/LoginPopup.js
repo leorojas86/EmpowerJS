@@ -1,6 +1,6 @@
 class LoginPopupMode {
 
-  get inputValues() { return Config.get().environment === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'}; }
+  get inputValues() { return Config.get().CURRENT_ENVIRONMENT === 'prod' ? { email: '', password: ''} : AppData.instance.testAccount; }
 
 }
 
@@ -33,7 +33,7 @@ class LoginPopupView {
       const password = Html.getValue(`${this.id}_user_password`);
       this.component.onLoginButtonClick(email, password);
     });
-    Html.onClick(`${this.id}_register_button`, () => this.component.popup.hide());
+    Html.onClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
     Html.setFocus(`${this.id}_user_email`);
   }
 
@@ -56,6 +56,12 @@ class LoginPopup {
       })
       .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))
       .finally(() => this.spinner.hide());
+  }
+
+  onRegisterButtonClick() {
+    this.popup.hide()
+    AppData.instance.setCurrentScreen('registration');
+    Html.refresh(App.instance);
   }
 
 }

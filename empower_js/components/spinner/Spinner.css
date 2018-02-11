@@ -6,7 +6,7 @@
 .spinner .spinner_animation {
   margin:auto; width:50px; height:50px;
   border:10px solid #f3f3f3; /* Light grey */ border-top:10px solid #3498db; /* Blue */ border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {

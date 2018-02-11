@@ -1,7 +1,7 @@
 class Config {
   static get() {
     return {
-      environment: 'mock'
+      CURRENT_ENVIRONMENT: 'mock'
     };
   }
 }

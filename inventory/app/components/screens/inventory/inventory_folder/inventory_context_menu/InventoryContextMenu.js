@@ -75,7 +75,7 @@ class InventoryContextMenu {
       title:`[@add_${itemType}_text@]`,
       placeholder:'[@name_text@]',
       onTextEntered: (text) => {
-        const action = () => ApiClient.instance.inventoryService.addItem(itemType, text, AppData.instance.getCurrentInventoryItem());
+        const action = () => ApiClient.instance.inventoryService.addChildItem(itemType, text, AppData.instance.getCurrentInventoryItem());
         App.instance.inventory.exectuteAction(action);
       }
     });

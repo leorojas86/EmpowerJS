@@ -1,0 +1,29 @@
+.registration_screen .container {
+  padding:20px; width:130px;
+}
+
+.registration_screen p {
+  margin-top:10px; margin-bottom:0px;
+  text-align:left;
+}
+
+.registration_screen .popup_content {
+	top:40px; right:5px;
+}
+
+.registration_screen button {
+	display:block; width:120px; margin-top:20px;
+  text-align:left;
+}
+
+.registration_screen .spinner {
+	border:medium none; border-radius:10px;
+}
+
+.registration_screen div.grayout {
+	background:transparent;
+}
+
+.registration_screen input {
+	width:120px;
+}

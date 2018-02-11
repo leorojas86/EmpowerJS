@@ -1,17 +1,22 @@
 class UserServiceMock {
 
   constructor() {
-    this.users = [{ name: 'test', email: 'test@test.com', password: 'test',  rootInventoryItemId:'0'}];
+    this.users = [{ name: 'test', email: 'test@test.com', password: 'test', rootInventoryItemId:'0'}];
     this.loggedUser = null;
     this.mockEnvironment = Environments.get()['mock'];
     this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
   }
 
-  register(name, email, password) {
+  restore() {
+    //Do not restore logged user for mock
+  }
+
+  register(email, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const newUser = { name: name, email: email, password: password };
+        const newUser = { name: email, email: email, password: password, rootInventoryItemId:'0' };
         this.users.push(newUser);
+        this.loggedUser = newUser;
         resolve(newUser);
       }, this.responseMiliSec);
     });

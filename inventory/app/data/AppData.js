@@ -7,6 +7,7 @@ class AppData {
 			currentScreen: 'welcome',
 			currentInventoryItem: null
 		};
+    this.testAccount = { email: 'test@test.com', password: 'test'};
   }
 
   getUser() { return this.data.user; }

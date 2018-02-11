@@ -61,7 +61,7 @@ class InventoryServiceMock {
     });
   }
 
-  addItem(type, name, parentItem) {
+  addChildItem(type, name, parentItem) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         this.currentId++;
