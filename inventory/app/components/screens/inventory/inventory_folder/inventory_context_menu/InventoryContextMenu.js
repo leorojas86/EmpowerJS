@@ -82,8 +82,15 @@ class InventoryContextMenu {
   }
 
   deleteItem(item) {
-    const action = () => ApiClient.instance.inventoryService.deleteItem(item);
-    App.instance.inventory.exectuteAction(action);
+    App.instance.confirmationPopup.show({
+      symbol: '?',
+      title: '[@delete_text@]',
+      message: '[@are_you_sure_you_want_delete_text@]',
+      onConfirmation: () => {
+        const action = () => ApiClient.instance.inventoryService.deleteItem(item);
+        App.instance.inventory.exectuteAction(action);
+      }
+    });
   }
 
   renameItem(item) {

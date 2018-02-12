@@ -14,7 +14,7 @@
 
 .inventory_folder_child .name  {
   position:relative;
-  font-size:18px;
+  font-size:14px;
 }
 
 .inventory_folder_child:hover {

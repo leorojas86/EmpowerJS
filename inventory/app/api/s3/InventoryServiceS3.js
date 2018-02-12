@@ -30,7 +30,7 @@ class InventoryServiceS3 {
     return this.getItemById(item.parentId)
       .then((parentItem) => {
         parentItem.children.splice(parentItem.children.indexOf(item.id), 1);//Delete from parent children
-        return saveItem(parentItem);
+        return this.saveItem(parentItem);
       })
       .then(() => S3.instance.deleteItem(item.id));
   }
