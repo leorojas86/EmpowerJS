@@ -1,19 +1,38 @@
 class InventoryFileModel {
 
   constructor() {
-    this.selectedImageData = null;
+    this.imageData = null;
+  }
+
+  getImageId() {
+    return AppData.instance.getCurrentInventoryItem().image;
   }
 
   saveImageData() {
-    const currentItem = AppData.instance.getCurrentInventoryItem();
-    currentItem.imageData = this.selectedImageData;
-    return ApiClient.instance.inventoryService.saveItem(currentItem)
-      .then(() => this.selectedImageData = null);
+    let imageId = this.getImageId();
+    if(imageId) {
+      return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
+    } else {
+      imageId = Guid.generateNewGUID();
+      return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
+        .then(() => {
+          AppData.instance.getCurrentInventoryItem().image = imageId;
+          return ApiClient.instance.inventoryService.saveItem(AppData.instance.getCurrentInventoryItem());
+        })
+        .then(() => this.loadImageData());
+    }
   }
 
-  get imageData() {
-    return this.selectedImageData || AppData.instance.getCurrentInventoryItem().imageData;
+  loadImageData() {
+    this.imageData = null;
+    const imageId = this.getImageId();
+    if(imageId) {
+      return ApiClient.instance.imageService.getImage(imageId)
+        .then((imageData) => this.imageData = imageData);
+    }
+    return Promise.resolve();
   }
+
 }
 
 class InventoryFileView {
@@ -50,7 +69,7 @@ class InventoryFileView {
   onDomUpdated() {
     Html.onClick(`${this.id}_image_button`, () => Html.getElement(`${this.id}_image_input`).click());
     Html.onChange(`${this.id}_image_input`, () => this.component.onImageSelected());
-    Html.setDisabled(`${this.id}_save_button`, this.component.model.selectedImageData === null);
+    Html.setDisabled(`${this.id}_save_button`, this.component.model.imageData === null);
     Html.onClick(`${this.id}_save_button`,() => this.component.onSaveButtonClick());
   }
 
@@ -65,15 +84,13 @@ class InventoryFile {
   }
 
   load() {
-    return new Promise((resolve, reject) => {
-      resolve();
-    });
+    return this.model.loadImageData();
   }
 
   onImageSelected() {
     this.spinner.show();
     Html.getImageData(`${this.view.id}_image_input`)
-      .then((imageData) => this.model.selectedImageData = imageData)
+      .then((imageData) => this.model.imageData = imageData)
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {
         this.spinner.hide();

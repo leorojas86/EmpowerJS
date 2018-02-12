@@ -1,17 +1,17 @@
 class ApiClient {
   constructor() {
-    switch(Config.get().CURRENT_ENVIRONMENT) {
+    const env = Config.get().CURRENT_ENVIRONMENT;
+    switch(env) {
       case 'mock':
         this.userService = new UserServiceMock();
         this.inventoryService = new InventoryServiceMock();
-      break;
-      case 'dev':
-        S3.instance = new S3(Environments.get()['dev'].s3);
-        this.userService = new UserServiceS3();
-        this.inventoryService = new InventoryServiceS3();
+        this.imageService = new ImageServiceMock();
       break;
       default:
-        console.error(`Unknown environment '${environment}'`);
+        S3.instance = new S3(Environments.get()[env].s3);
+        this.userService = new UserServiceS3();
+        this.inventoryService = new InventoryServiceS3();
+        this.imageService = new ImageServiceS3();
       break;
     }
   }

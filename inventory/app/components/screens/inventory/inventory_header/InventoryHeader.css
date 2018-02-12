@@ -1,6 +1,6 @@
 .inventory_header {
   height:30px; margin:0px;
-  border:#3d557eab; border-radius:5px; border-style:solid; border-left-width:0px; border-right-width:0px; border-top-width:0px;
+  border:#3d557eab; border-width:2px; border-radius:5px; border-style:solid; border-left-width:0px; border-right-width:0px; border-top-width:0px;
 }
 
 .inventory_header .search {

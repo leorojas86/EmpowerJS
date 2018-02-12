@@ -13,37 +13,46 @@ class S3 {
       });
     }
 
-    saveItem(itemKey, data, contentType) {
+    saveItem(itemKey, item, contentType) {
+      return this.saveData(itemKey, JSON.stringify(item), contentType);
+    }
+
+    getItem(itemKey) {
+      return this.getData(itemKey)
+        .then((data) => JSON.parse(data));
+    }
+
+    saveData(dataKey, data, contentType) {//TODO: do not cache images
       return new Promise((resolve, reject) => {
         this.s3.upload({
-          Key:itemKey,
-          Body:JSON.stringify(data),
+          Key:dataKey,
+          Body:data,
           ACL:'public-read',
           ContentType:contentType
         }, (err, data) => {
           if (err) {
             reject(err);
           } else {
-            Storage.set(itemKey, null);
+            Storage.remove(dataKey);
             resolve();
           }
         });
       });
     }
 
-    getItem(itemKey) {
-      return new Promise((resolve, reject) => {
-        const item = Storage.getObject(itemKey);
-        if(item) {
-          resolve(item);
+    getData(dataKey) {
+      return new Promise((resolve, reject) => {//TODO: do not cache images
+        const data = Storage.getData(dataKey);
+        if(data) {
+          resolve(data);
         } else {
-          this.s3.getObject({ Key:itemKey }, (err, data) => {
+          this.s3.getObject({ Key:dataKey }, (err, data) => {
             if (err) {
               reject(err);
             } else {
-              const itemJSON = data.Body.toString();
-              resolve(JSON.parse(itemJSON));
-              Storage.set(itemKey, itemJSON);
+              const dataString = data.Body.toString();
+              resolve(dataString);
+              Storage.setData(dataKey, dataString);
             }
            });
         }
@@ -56,7 +65,7 @@ class S3 {
           if (err) {
             reject(err);
           } else {
-            Storage.set(itemKey, null);
+            Storage.remove(itemKey);
             resolve();
           }
         });

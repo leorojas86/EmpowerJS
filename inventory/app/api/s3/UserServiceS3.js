@@ -19,7 +19,7 @@ class UserServiceS3 {
   }
 
   register(email, password) {
-      const rootItem = { id:GUIDUtils.generateNewGUID(), name:'home', type:'folder', parentId:null, children:[] };
+      const rootItem = { id:Guid.generateNewGUID(), name:'home', type:'folder', parentId:null, children:[] };
       return this._checkForExistingUser(email)
         .then(() => ApiClient.instance.inventoryService.saveItem(rootItem))//Create root/home item
         .then(() => {
