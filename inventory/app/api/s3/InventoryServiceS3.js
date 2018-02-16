@@ -26,13 +26,22 @@ class InventoryServiceS3 {
     return this._getPathItemRecursively(item);
   }
 
+  _deleteRecursively(item) {
+    const deleteChildrenPromises = item.children.map((childId) => {
+      return S3.instance.getItem(`item_${childId}`)
+        .then((item) => _deleteChildrenRecursively(item));
+    });
+    return Promise.all(deleteChildrenPromises)
+      .then(() => S3.instance.deleteItem(`item_${item.id}`));
+  }
+
   deleteItem(item) {
     return this.getItemById(item.parentId)
       .then((parentItem) => {
         parentItem.children.splice(parentItem.children.indexOf(item.id), 1);//Delete from parent children
         return this.saveItem(parentItem);
       })
-      .then(() => S3.instance.deleteItem(item.id));
+      .then(() => this._deleteRecursively(item));
   }
 
   addChildItem(type, name, parentItem) {
