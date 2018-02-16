@@ -17,6 +17,14 @@
   font-size:14px;
 }
 
-.inventory_folder_child:hover {
-	background-color:#f5f1e0
+@supports (-webkit-overflow-scrolling: touch) {/* CSS for mobile devices */
+  .inventory_folder_child:active {
+  	background-color:#f5f1e0
+  }
+}
+
+@supports not (-webkit-overflow-scrolling: touch) {/* CSS for none mobile devices */
+  .inventory_folder_child:hover {
+  	background-color:#f5f1e0
+  }
 }

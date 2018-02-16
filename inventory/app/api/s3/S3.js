@@ -61,7 +61,7 @@ class S3 {
 
     deleteItem(itemKey) {
       return new Promise((resolve, reject) => {
-        this.s3.deleteObject({Key: itemKey}, (err, data) => {
+        this.s3.deleteObject({ Key:itemKey }, (err, data) => {
           if (err) {
             reject(err);
           } else {
@@ -74,7 +74,7 @@ class S3 {
 
     hasItem(itemKey) {
       return new Promise((resolve, reject) => {
-        this.s3.headObject({Key: itemKey}, (err, metadata) => {
+        this.s3.headObject({ Key:itemKey }, (err, metadata) => {
           if (err) {
             if(err.code === 'NotFound' || err.code === 'Forbidden') {
               resolve(false); //TODO: find the best way to handle this

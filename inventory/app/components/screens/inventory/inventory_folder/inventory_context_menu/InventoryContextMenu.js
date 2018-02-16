@@ -87,7 +87,8 @@ class InventoryContextMenu {
       title: '[@delete_text@]',
       message: '[@are_you_sure_you_want_delete_text@]',
       onConfirmation: () => {
-        const action = () => ApiClient.instance.inventoryService.deleteItem(item);
+        const action = () => ApiClient.instance.inventoryService.deleteItem(item)
+          .then(() => App.instance.inventory.model.loadItem(AppData.instance.getCurrentInventoryItem().id));//Refreshing parent since children has changed
         App.instance.inventory.exectuteAction(action);
       }
     });

@@ -24,7 +24,7 @@ class DropdownMenuView {
       });
       return `<div id='${this.id}' class='${this.id} dropdown_menu'>
                 <div id='${this.id}_grayout' class='grayout'></div>
-                <div class='options'>
+                <div id='${this.id}_options' class='options'>
                   ${optionsHTML}
                 </div>
               </div>`;
@@ -45,7 +45,13 @@ class DropdownMenuView {
   }
 
   setPosition(position) {
-    const element = Html.getElement(this.id);
+    const element = Html.getElement(`${this.id}_options`);
+    const windowScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+		const windowScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
+    const maxX = window.innerWidth + windowScrolledXOffset - element.offsetWidth;
+    const maxY = window.innerHeight + windowScrolledYOffset - element.offsetHeight;
+    position.x = position.x < maxX ? position.x : maxX;
+    position.y = position.y < maxY ? position.y : maxY;
     element.style.position = "absolute";
     element.style.display  = 'inline';
 		element.style.left 	   = position.x + "px";

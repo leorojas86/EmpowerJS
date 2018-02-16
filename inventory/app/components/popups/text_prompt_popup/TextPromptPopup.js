@@ -31,8 +31,13 @@ class TextPromptPopupView {
     Html.onKeyUp(`${this.id}_input_text`, (key) => {
       const inputValue = Html.getValue(`${this.id}_input_text`);
       Html.setDisabled(`${this.id}_ok_button`, !inputValue);
-      if(inputValue && key.code === 'Enter') {
-        this.submit();
+      switch (key.code) {
+        case 'Enter':
+          if(inputValue) {
+            this.submit();
+          }
+        break;
+        case 'Escape': this.component.popup.hide(); break;
       }
     });
     Html.setFocus(`${this.id}_input_text`);
