@@ -51,6 +51,6 @@ One of the guidelines that should be followed using EmpowerJS is to avoid includ
 - Clone the repo.
 - Drag and drop any `inventory/build/output/index.html` to the browser.
 - See how it works, test and develop
-- Any time a change is made to under the `inventory/app` folder you'll need to run `npm run build` in the `inventory/build` folder to get that change in `inventory/build/output/index.html`.
+- Any time a change is made to under the `inventory/app` folder you'll need to run `npm run build` in the `inventory/build` folder to get that change updated in `inventory/build/output/index.html`.
 
 [TODO]: https://github.com/leorojas86/EmpowerJS/blob/master/TODO.md
