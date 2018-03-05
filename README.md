@@ -42,14 +42,15 @@ One of the guidelines that should be followed using EmpowerJS is to avoid includ
   - Keep the html/DOM structure to the minimal required (do not create heavy html hierarchy).
 - Fast development:
   - No installation needed since no server needed.
-  - Frontend and mock API/backend are pure JS so we can just drag a drop the index.html to the browser and that's it.
+  - Frontend and mock API/backend are pure JS so we can just drag a drop the `inventory/build/output/index.html` to the browser and that's it.
   - Mock API/backend has to be adjusted to the API that the application will use (or the API has to be adjusted to 'match' the mock API), the application will use Mock as one environment.
 - Multiplatform:
   - Runs on Chrome on any platform and Safari on Mac/iOS.
 
 ## How to start?
 - Clone the repo.
-- Drag and drop any index.html to the browser.
-- See how it works, test and develop.
+- Drag and drop any `inventory/build/output/index.html` to the browser.
+- See how it works, test and develop
+- Any time a change is made to under the `inventory/app` folder you'll need to run `npm run build` in the `inventory/build` folder to get that change in `inventory/build/output/index.html`.
 
 [TODO]: https://github.com/leorojas86/EmpowerJS/blob/master/TODO.md
