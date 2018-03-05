@@ -1,0 +1,373 @@
+.breadcrumb {
+  display:inline; margin:3px;
+  font-size:18px;
+}
+
+.breadcrumb .home {
+  font-size:28px;
+  cursor:pointer; cursor:hand;
+  border:none; border-radius:5px;
+}
+
+.breadcrumb .arrow {
+  margin:3px;
+  font-size:15px;
+}
+
+.breadcrumb .clickable_path_item {
+  text-decoration:underline;
+  cursor:pointer; cursor:hand;
+  border:none; border-radius:5px;
+}
+
+
+@supports (-webkit-overflow-scrolling: touch) {/* CSS for mobile devices */
+  .breadcrumb .home:active {
+  	background-color:#f5f1e0
+  }
+  .breadcrumb .clickable_path_item:active {
+  	background-color:#f5f1e0
+  }
+}
+
+@supports not (-webkit-overflow-scrolling: touch) {/* CSS for none mobile devices */
+  .breadcrumb .home:hover {
+  	background-color:#f5f1e0
+  }
+  .breadcrumb .clickable_path_item:hover {
+  	background-color:#f5f1e0
+  }
+}
+.dropdown_menu .options {
+  position:absolute;
+}
+
+.dropdown_menu button {
+  display:block; width:120px;
+  text-align:left;
+}
+
+.dropdown_menu .grayout {
+	position:fixed; top:0px; right:0px; width:100%; height:100%;
+	background:transparent;
+}
+.image_chooser {
+  margin:10px;
+  font-size:200px;
+}
+
+.image_chooser img {
+  max-width:80%; max-height:80%;
+}
+
+.image_chooser .select_image_button {
+  display:block;
+}
+.popup .popup_content {
+	position:absolute; padding:10px;
+	background:#c6ccd5d9;
+	border:medium none; border-radius:10px; box-shadow:0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
+}
+
+.popup .grayout {
+	position:fixed; top:0px; right:0px; width:100%; height:100%;
+	background:#0000005c;
+}
+.spinner {
+  position:absolute; display:flex; left:0px; top:0px; width:100%; height:100%;
+  background:rgba(0, 0, 0, 0.15);
+}
+
+.spinner .spinner_animation {
+  margin:auto; width:50px; height:50px;
+  border:10px solid #f3f3f3; /* Light grey */ border-top:10px solid #3498db; /* Blue */ border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); }
+}
+.text_input {
+	background-color:white; border:none; border-radius:5px;
+}
+
+.text_input input {
+  min-width:180px; margin:0px;
+	font-size:18px;
+}
+
+.text_input input:focus {
+	outline:none;
+}
+html {
+	-webkit-touch-callout:none; -moz-user-select:none; -webkit-user-select:none; /*HACK: Fix iOS oncontextmenu event*/
+	background:#c6ccd5;
+}
+
+body {
+	margin:0px;
+  color:#3D557E; font-family: "Times New Roman", Times, serif;
+}
+
+input {
+	width:130px; margin:5px;
+	border:none; border-radius:3px;
+	font-size:15px; color:#3D557E; font-family: "Times New Roman", Times, serif;
+}
+
+p {
+	margin-left:5px; margin-right:5px;
+}
+
+button {
+	margin:5px; padding:0px; padding-left:5px; padding-right:5px; height:30px;
+	font-size:18px; color:#3D557E; font-family: "Times New Roman", Times, serif;
+	background-color:white; border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+	cursor:pointer; cursor:hand;
+}
+
+button:disabled {
+	opacity:0.5
+}
+
+@supports (-webkit-overflow-scrolling: touch) {/* CSS for mobile devices */
+  button:active {
+  	background-color:#f5f1e0
+  }
+}
+
+@supports not (-webkit-overflow-scrolling: touch) {/* CSS for none mobile devices */
+  button:hover {
+  	background-color:#f5f1e0
+  }
+}
+.header {
+	height:40px;
+  background:#3D557E; box-shadow:0 0 3px #112A56,0 3px 6px #112A56;
+	text-align:center;
+}
+
+.header .right {
+	right:0px; margin-right:5px;
+}
+
+.header .left {
+	left:0px; margin-left:5px;
+}
+
+.header button {
+	position:absolute; width:30px; height:30px;
+	font-size:22px;
+}
+
+.header .screen_title {
+	position:relative; top:5px;
+	font-size:25px; color:white;
+}
+.confirmation_popup .popup_content {
+	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
+	padding:30px; min-width:200px;
+}
+
+.confirmation_popup .title {
+	font-size:20px;
+}
+
+.confirmation_popup .message {
+	margin-top:40px; margin-bottom:40px;
+}
+
+.confirmation_popup button {
+	min-width:80px;
+}
+.login_popup p {
+  margin-top:10px; margin-bottom:0px;
+}
+
+.login_popup .popup_content {
+	top:40px; right:5px;
+}
+
+.login_popup button {
+	display:block; width:120px; margin-top:20px;
+  text-align:left;
+}
+
+.login_popup .spinner {
+	border:medium none; border-radius:10px;
+}
+
+.login_popup div.grayout {
+	background:transparent;
+}
+
+.login_popup input {
+	width:120px;
+}
+.message_popup .popup_content {
+	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
+	padding:30px; min-width:200px;
+}
+
+.message_popup .title {
+	font-size:20px;
+}
+
+.message_popup .message {
+	margin-top:40px; margin-bottom:40px;
+}
+
+.message_popup button {
+	min-width:80px;
+}
+.settings_popup .popup_content {
+	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
+	padding:30px; min-width:200px;
+}
+
+.settings_popup .title {
+	font-size:20px;
+}
+
+.settings_popup .setting {
+	margin-top:20px; margin-bottom:20px; width:160px;
+	text-align:left;
+}
+
+.settings_popup .setting select {
+	position:absolute; right:30px; width:75px;
+}
+
+.settings_popup button {
+	min-width:80px;
+}
+.text_prompt_popup .popup_content {
+	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
+	padding:30px; min-width:200px;
+}
+
+.text_prompt_popup .title {
+	font-size:20px;
+}
+
+.text_prompt_popup input {
+	display:block; width:140px; margin:25px;
+}
+
+.text_prompt_popup button {
+	text-align:center;
+	min-width:80px;
+}
+.user_popup .popup_content {
+	right:5px; top:40px; padding:10px;
+	text-align:left;
+}
+
+.user_popup .user_name {
+	margin:5px;
+}
+
+.user_popup button {
+	display:block; width:140px; margin-top:15px;
+	text-align:left;
+}
+
+.user_popup .spinner {
+	border:medium none; border-radius:10px;
+}
+
+.user_popup div.grayout {
+	background:transparent;
+}
+.inventory_file {
+  min-height:300px;
+}
+
+.inventory_file .image {
+  margin:10px;
+  font-size:200px;
+}
+
+.inventory_file img {
+  max-width:80%; max-height:80%;
+}
+
+.inventory_folder_child {
+  float:left; width:75px; height:80px; margin:0px; margin-left:5px; margin-top:5px; padding:5px;
+  text-align:center;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  border:none; border-radius:5px;
+  cursor:pointer; cursor:hand;
+}
+
+.inventory_folder_child .symbol {
+  display:block; width:55px; height:55px; margin:10px; margin-top:0px; margin-bottom:5px;
+  background-color:white; border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  font-size:50px;
+}
+
+.inventory_folder_child .name  {
+  position:relative;
+  font-size:14px;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {/* CSS for mobile devices */
+  .inventory_folder_child:active {
+  	background-color:#f5f1e0
+  }
+}
+
+@supports not (-webkit-overflow-scrolling: touch) {/* CSS for none mobile devices */
+  .inventory_folder_child:hover {
+  	background-color:#f5f1e0
+  }
+}
+.inventory_folder {
+  min-height:300px; overflow:auto;
+}
+.inventory_header {
+  height:30px; margin:0px;
+  border:#3d557eab; border-width:2px; border-radius:5px; border-style:solid; border-left-width:0px; border-right-width:0px; border-top-width:0px;
+}
+
+.inventory_header .search {
+  position:absolute; right:0px; margin-right:5px;
+  font-size:28px;
+}
+.inventory {
+  position:relative; margin:5px; margin-left:2px; margin-right:2px; min-height:200px;
+  border:#3d557eab; border-width:2px; border-radius:5px; border-style:solid;
+}
+.registration_screen .container {
+  padding:20px; width:130px;
+}
+
+.registration_screen p {
+  margin-top:10px; margin-bottom:0px;
+  text-align:left;
+}
+
+.registration_screen .popup_content {
+	top:40px; right:5px;
+}
+
+.registration_screen button {
+	display:block; width:120px; margin-top:20px;
+  text-align:left;
+}
+
+.registration_screen .spinner {
+	border:medium none; border-radius:10px;
+}
+
+.registration_screen div.grayout {
+	background:transparent;
+}
+
+.registration_screen input {
+	width:120px;
+}
+.welcome_screen p {
+  margin-top:50px;
+  font-size:25px; text-align:center;
+}
