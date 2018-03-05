@@ -28,6 +28,11 @@ class PopupView {
   onDomUpdated() {
     if(this.component.model.isShown) {
       Html.onMouseDown(`${this.contentComponent.view.id}_grayout`, () => this.component.hide());
+      Html.onKeyUp(this.id, (key) => {
+        if(key.code === 'Escape') {
+          this.component.hide();
+        }
+      });
     }
   }
 

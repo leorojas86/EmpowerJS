@@ -1,0 +1,12 @@
+.text_input {
+	background-color:white; border:none; border-radius:5px;
+}
+
+.text_input input {
+  min-width:180px; margin:0px;
+	font-size:18px;
+}
+
+.text_input input:focus {
+	outline:none;
+}

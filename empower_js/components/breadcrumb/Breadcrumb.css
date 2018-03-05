@@ -6,6 +6,7 @@
 .breadcrumb .home {
   font-size:28px;
   cursor:pointer; cursor:hand;
+  border:none; border-radius:5px;
 }
 
 .breadcrumb .arrow {
@@ -16,4 +17,24 @@
 .breadcrumb .clickable_path_item {
   text-decoration:underline;
   cursor:pointer; cursor:hand;
+  border:none; border-radius:5px;
+}
+
+
+@supports (-webkit-overflow-scrolling: touch) {/* CSS for mobile devices */
+  .breadcrumb .home:active {
+  	background-color:#f5f1e0
+  }
+  .breadcrumb .clickable_path_item:active {
+  	background-color:#f5f1e0
+  }
+}
+
+@supports not (-webkit-overflow-scrolling: touch) {/* CSS for none mobile devices */
+  .breadcrumb .home:hover {
+  	background-color:#f5f1e0
+  }
+  .breadcrumb .clickable_path_item:hover {
+  	background-color:#f5f1e0
+  }
 }

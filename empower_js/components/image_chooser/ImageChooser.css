@@ -1,0 +1,12 @@
+.image_chooser {
+  margin:10px;
+  font-size:200px;
+}
+
+.image_chooser img {
+  max-width:80%; max-height:80%;
+}
+
+.image_chooser .select_image_button {
+  display:block;
+}

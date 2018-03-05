@@ -31,8 +31,10 @@ class Spinner {
   }
 
   show() {
-    this.model.isShown = true;
-    Html.refresh(this);
+    if(!this.model.isShown) {
+      this.model.isShown = true;
+      Html.refresh(this);
+    }
   }
 
   hide() {

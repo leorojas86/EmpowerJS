@@ -55,12 +55,25 @@ class Html {
     return document.getElementById(id).disabled;
   }
 
+  static setVisible(id, visible) {
+    document.getElementById(id).style.visibility = visible ? 'visible' : 'hidden';
+  }
+
+  static isVisible(id) {
+    return document.getElementById(id).style.visibility == 'visible';
+  }
+
   static getValue(id) {
     return document.getElementById(id).value;
   }
 
   static setFocus(id) {
-    return document.getElementById(id).focus();
+    const element = document.getElementById(id);
+    if(element.type && element.type === 'text') {//Move the cursor to the end of text for input texts
+      element.selectionStart = element.value.length;
+      element.selectionEnd = element.value.length;
+    }
+    element.focus();
   }
 
   static getImageData(id) {
@@ -110,6 +123,13 @@ class Html {
 		point.x += pageScrolledXOffset;
 		point.y += pageScrolledYOffset;
     return point;
+  }
+
+  static startTimeout(callback, milliseconds, currentTimeoutHandler) {
+    if(currentTimeoutHandler) {
+      clearTimeout(currentTimeoutHandler);
+    }
+    return setTimeout(callback, milliseconds);
   }
 
 }
