@@ -15,7 +15,7 @@ class WelcomeView {
 class Welcome {
 
   constructor() {
-    this.view = new WelcomeView();
+    this.view = new WelcomeView(this);
   }
 
 }

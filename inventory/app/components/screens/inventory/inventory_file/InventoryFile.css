@@ -2,11 +2,24 @@
   min-height:300px;
 }
 
-.inventory_file .image {
-  margin:10px;
-  font-size:200px;
+.inventory_file table {
+  margin-top:12px;
 }
 
-.inventory_file img {
-  max-width:80%; max-height:80%;
+.inventory_file tr {
+  border:#3d557eab; border-width:1px; border-radius:5px; border-style:solid;
+  text-align:left;
+  padding:8px;
+}
+
+.inventory_file .save_button {
+  position:absolute; right:0px;
+}
+
+.inventory_file .file_header {
+  height:50px;
+}
+
+.inventory_file input {
+  width:200px;
 }

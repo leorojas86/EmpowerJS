@@ -69,7 +69,7 @@ class Registration {
     this.model.validateRegistrationData(email, password, confirmPassword)
       .then(() => {
         return ApiClient.instance.userService.register(email, password)
-          .then((response) => App.instance.onLoggedUserChanged(response))
+          .then(() => App.instance.onLoggedUserChanged())
           .catch((reason) => App.instance.handleError(reason, '[@registration_failed_text@]'))
       })
       .catch((reason) => App.instance.messagePopup.show({ symbol:'trouble', title:'[@registration_failed_text@]', message:reason }))

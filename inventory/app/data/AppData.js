@@ -1,5 +1,12 @@
 class AppData {
 
+  static get instance() {
+    if (AppData._instance) {
+      return AppData._instance;
+    }
+    return AppData._instance = new AppData();
+  }
+
   constructor() {
     this.data = {//Default values
 			user: null,
@@ -7,7 +14,7 @@ class AppData {
 			currentScreen: 'welcome',
 			currentInventoryItem: null
 		};
-    this.testAccount = { email: 'test@test.com', password: 'test'};
+    this.testAccount = { email:'test@test.com', password:'test'};
   }
 
   getUser() { return this.data.user; }

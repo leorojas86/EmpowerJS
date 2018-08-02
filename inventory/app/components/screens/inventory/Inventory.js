@@ -15,8 +15,7 @@ class InventoryModel {
   }
 
   loadItem(id) {
-    id = id || AppData.instance.getUser().rootInventoryItemId;
-    return ApiClient.instance.inventoryService.getItemById(id)
+    return (id != null ? ApiClient.instance.inventoryService.getItemById(id) : ApiClient.instance.inventoryService.getRootItem())
       .then((item) => AppData.instance.setCurrentInventoryItem(item));
   }
 
@@ -38,7 +37,7 @@ class InventoryView {
   }
 
   onDomUpdated() {
-    if(!this.component.model.currentItemComponent) {
+    if(!AppData.instance.getCurrentInventoryItem()) {
       this.component.loadItem();
     }
   }

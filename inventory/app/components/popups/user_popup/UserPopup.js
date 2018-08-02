@@ -15,9 +15,6 @@ class UserPopupView {
               <span class='user_name'>
                 <span class="lsf symbol">user</span> ${user.name}
               </span>
-              <button id='${this.id}_cart_button'>
-                <span class="lsf symbol">cart</span> [@cart_text@]
-              </button>
               <button id='${this.id}_notifications_button'>
                 <span class="lsf symbol">globe</span> [@notifications_text@]
               </button>
@@ -41,7 +38,7 @@ class UserPopupView {
 class UserPopup {
 
   constructor() {
-		this.model = new UserPopupModel();
+		this.model = new UserPopupModel(this);
 		this.view = new UserPopupView(this);
     this.spinner = Html.addChild(new Spinner('user_popup_spinner'), this);
 	}
@@ -52,7 +49,7 @@ class UserPopup {
       .finally(() => {
         this.spinner.hide();
         this.popup.hide();
-        App.instance.onLoggedUserChanged(null);
+        App.instance.onLoggedUserChanged();
       });
   }
 

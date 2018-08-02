@@ -1,5 +1,12 @@
 class Localization {
 
+  static get instance() {
+    if (Localization._instance) {
+      return Localization._instance;
+    }
+    return Localization._instance = new Localization();
+  }
+
   initialize(localizationTable, currentLanguage) {
     this.localizationTable = localizationTable;
     this.currentLanguage = currentLanguage;
@@ -29,8 +36,3 @@ class Localization {
   }
 
 }
-
-
-//https://regex101.com/
-//\[@+\w+\@\]
-//<button id="user_button" class="user_button">[@LOGIN_TEXT@]</button>

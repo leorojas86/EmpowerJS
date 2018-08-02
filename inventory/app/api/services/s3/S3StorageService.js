@@ -1,6 +1,6 @@
 //https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html
 //https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
-class S3 {
+class S3StorageService {
     constructor(config) {
       AWS.config.update({
         region: config.bucketRegion,
@@ -20,6 +20,11 @@ class S3 {
     getItem(itemKey) {
       return this.getData(itemKey)
         .then((data) => JSON.parse(data));
+    }
+
+    getItemWithDefault(itemKey, defaultData) {
+      return this.hasItem(itemKey)
+        .then((hasItem) => hasItem ? this.getItem(itemKey) : defaultData);
     }
 
     saveData(dataKey, data, contentType) {//TODO: do not cache images

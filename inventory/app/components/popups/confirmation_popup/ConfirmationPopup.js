@@ -39,7 +39,7 @@ class ConfirmationPopupView {
 class ConfirmationPopup {
 
   constructor() {
-    this.model = new ConfirmationPopupModel();
+    this.model = new ConfirmationPopupModel(this);
 		this.view = new ConfirmationPopupView(this);
   }
 

@@ -30,22 +30,30 @@ class AppView {
 
 	buildHTML() {
 		return `<div id='${this.id}' class='${this.id}'>
-							${ this.component.header.view.buildHTML() }
-							${ this.component.model.currentScreen.view.buildHTML() }
-							${ this.component.contextMenu.view.buildHTML() }
-							${ this.component.loginPopup.view.buildHTML() }
-              ${ this.component.userPopup.view.buildHTML() }
-							${ this.component.messagePopup.view.buildHTML() }
-							${ this.component.textPromptPopup.view.buildHTML() }
-							${ this.component.settingsPopup.view.buildHTML() }
-							${ this.component.confirmationPopup.view.buildHTML() }
-						</div>`;
+					${ this.component.header.view.buildHTML() }
+					${ this.component.model.currentScreen.view.buildHTML() }
+					${ this.component.contextMenu.view.buildHTML() }
+					${ this.component.loginPopup.view.buildHTML() }
+					${ this.component.userPopup.view.buildHTML() }
+					${ this.component.settingsPopup.view.buildHTML() }
+					${ this.component.searchItemsPopup.view.buildHTML() }
+					${ this.component.messagePopup.view.buildHTML() }
+					${ this.component.textPromptPopup.view.buildHTML() }
+					${ this.component.confirmationPopup.view.buildHTML() }
+				</div>`;
 	}
 
 }
 
 class App
 {
+
+	static get instance() {
+		if (App._instance) {
+			return App._instance;
+		}
+		return App._instance = new App();
+	}
 
 	constructor() {
 		this.model = new AppModel(this);
@@ -56,41 +64,23 @@ class App
 		this.inventory = Html.addChild(new Inventory(), this);
 		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
 		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
-    this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
+    	this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
 		this.messagePopup = Html.addChild(new Popup(new MessagePopup()), this);
 		this.textPromptPopup = Html.addChild(new Popup(new TextPromptPopup()), this);
 		this.settingsPopup = Html.addChild(new Popup(new SettingsPopup()), this);
 		this.confirmationPopup = Html.addChild(new Popup(new ConfirmationPopup()), this);
+		this.searchItemsPopup = Html.addChild(new Popup(new SearchItemsPopup()), this);
 	}
 
 	handleError(errorData, title) {
 		const message = errorData.errorCode ? `[@${errorData.errorCode}@]` : `[@something_wrong_text@]`;
-		App.instance.messagePopup.show({ symbol:'trouble', title:title, message:message });
 		console.error(errorData);
+		return App.instance.messagePopup.show({ symbol:'trouble', title:title, message:message });
 	}
 
-	onLoggedUserChanged(user) {
-		this.model.updateLoggedUser(user);
+	onLoggedUserChanged() {
+		this.model.updateLoggedUser(ApiClient.instance.userService.loggedUser);
 		Html.refresh(App.instance);
 	}
 
 }
-
-/*
-
-App
-	- Header
-		- ScreenTitle
-		- ScreenLinks
-			- Home
-			- Inventory
-			- ?
-		- User
-	- Body
-		- Home
-		- Inventory
-	- Footer
-		- Eula
-		- Version
-	- Modals
-*/

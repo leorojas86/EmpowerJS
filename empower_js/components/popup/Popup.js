@@ -51,11 +51,13 @@ class Popup {
     this.contentComponent.model.data = popupData;
     this.model.isShown = true;
     Html.refresh(this);
+    return new Promise((resolve, reject) => this.hidePromise = resolve);
   }
 
   hide() {
     this.model.isShown = false;
     Html.refresh(this);
+    this.hidePromise();
   }
 
 }

@@ -32,7 +32,7 @@ class MessagePopupView {
 class MessagePopup {
 
   constructor() {
-    this.model = new MessagePopupModel();
+    this.model = new MessagePopupModel(this);
 		this.view = new MessagePopupView(this);
   }
 

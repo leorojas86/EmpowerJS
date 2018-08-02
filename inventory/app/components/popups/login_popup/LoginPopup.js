@@ -42,7 +42,7 @@ class LoginPopupView {
 class LoginPopup {
 
   constructor() {
-		this.model = new LoginPopupMode();
+		this.model = new LoginPopupMode(this);
 		this.view = new LoginPopupView(this);
     this.spinner = Html.addChild(new Spinner('login_popup_spinner'), this);
 	}
@@ -52,7 +52,7 @@ class LoginPopup {
     ApiClient.instance.userService.login(email, password)
       .then((response) => {
         this.popup.hide();
-        App.instance.onLoggedUserChanged(response);
+        App.instance.onLoggedUserChanged();
       })
       .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))
       .finally(() => this.spinner.hide());

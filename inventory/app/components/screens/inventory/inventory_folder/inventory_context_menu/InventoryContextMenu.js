@@ -74,7 +74,7 @@ class InventoryContextMenu {
     App.instance.textPromptPopup.show({
       title:`[@add_${itemType}_text@]`,
       placeholder:'[@name_text@]',
-      onTextEntered: (text) => {
+      onTextEntered:(text) => {
         const action = () => ApiClient.instance.inventoryService.addChildItem(itemType, text, AppData.instance.getCurrentInventoryItem());
         App.instance.inventory.exectuteAction(action);
       }

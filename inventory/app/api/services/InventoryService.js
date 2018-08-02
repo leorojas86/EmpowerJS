@@ -1,4 +1,6 @@
-class InventoryServiceS3 {
+const INVENTORY_ROOT_ITEM_ID = "root";
+
+class InventoryService {
 
   _getPathItemRecursively(item) {
     const pathItem = { id:item.id, name:item.name };
@@ -13,12 +15,28 @@ class InventoryServiceS3 {
     return Promise.resolve([pathItem]);
   }
 
+  _checkForExistingRootItem() {
+    return ApiClient.instance.storageService.hasItem(INVENTORY_ROOT_ITEM_ID)
+      .then((hasItem) => {
+        //TODO: Check when should this be created
+        /*if(!hasItem) {
+          const newItem = { id:INVENTORY_ROOT_ITEM_ID, name:'home', type:'folder', parentId:null, children:[] };
+          return this.saveItem(newItem);
+        }*/
+      });
+  }
+
+  getRootItem() {
+    return this._checkForExistingRootItem()
+      .then(() => this.getItemById(INVENTORY_ROOT_ITEM_ID));
+  }
+
   getItemById(id) {
-    return S3.instance.getItem(`item_${id}`);
+    return ApiClient.instance.storageService.getItem(`item_${id}`);
   }
 
   getItemChildren(item) {
-    const promises = item.children.map((childId) => S3.instance.getItem(`item_${childId}`));
+    const promises = item.children.map((childId) => ApiClient.instance.storageService.getItem(`item_${childId}`));
     return Promise.all(promises);
   }
 
@@ -28,11 +46,11 @@ class InventoryServiceS3 {
 
   _deleteRecursively(item) {
     const deleteChildrenPromises = item.children.map((childId) => {
-      return S3.instance.getItem(`item_${childId}`)
-        .then((item) => _deleteChildrenRecursively(item));
+      return ApiClient.instance.storageService.getItem(`item_${childId}`)
+        .then((item) => this._deleteRecursively(item));
     });
     return Promise.all(deleteChildrenPromises)
-      .then(() => S3.instance.deleteItem(`item_${item.id}`));
+      .then(() => ApiClient.instance.storageService.deleteItem(`item_${item.id}`));
   }
 
   deleteItem(item) {
@@ -46,9 +64,11 @@ class InventoryServiceS3 {
 
   addChildItem(type, name, parentItem) {
     const newItem = { id:Guid.generateNewGUID(), name:name, type:type, parentId:parentItem.id, children:[] };
-    parentItem.children.push(newItem.id);
     return this.saveItem(newItem)
-      .then(() => this.saveItem(parentItem));
+      .then(() => {
+        parentItem.children.push(newItem.id);
+        this.saveItem(parentItem);
+      });
   }
 
   renameItem(item, newName) {
@@ -71,7 +91,7 @@ class InventoryServiceS3 {
   }
 
   saveItem(item) {
-    return S3.instance.saveItem(`item_${item.id}`, item);
+    return ApiClient.instance.storageService.saveItem(`item_${item.id}`, item);
   }
 
 }

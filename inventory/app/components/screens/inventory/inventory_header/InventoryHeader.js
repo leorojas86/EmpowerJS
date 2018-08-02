@@ -20,7 +20,7 @@ class InventoryHeaderView {
   buildHTML() {
     return `<div id='${this.id}' class='${this.id}'>
               ${ this.component.breadcrumb.view.buildHTML() }
-              <span class="lsf symbol search">search</span>
+              <!--<span class="lsf symbol search">search</span>-->
             </div>`;
   }
 
